@@ -15,7 +15,7 @@ print("Hopfield Modells mit 10000 Neuronen: Bilder bekannter Physiker")
 # Lade Bilder bekannter Physiker als NumPy array
 N = 100 ** 2
 path_list = [
-    os.path.join(DATA_DIR, "images/famous_physicists", f)
+    os.path.join(DATA_DIR, "\\famous_physicists", f)
     for f in [
         "einstein.jpg",
         "hilbert.jpg",

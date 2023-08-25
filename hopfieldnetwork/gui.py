@@ -71,7 +71,7 @@ class GUI:
         self.highlightthickness = 1
         self.n_neurons_vec = (4, 9, 25, 36, 100, 400, 900, 1600, 2500, 3600, 10000)
 
-        # initialize Hopfield network
+        # initialize Hopfield network 初始化网络
         self.hopfield_network = HopfieldNetwork(N=self.settings.default_N)
         self.initialize_hopfield_network_variables()
 
@@ -266,6 +266,7 @@ class GUI:
                 repr(self.hopfield_network.S.reshape(self.N_sqrt, self.N_sqrt)),
             ),
         )
+        # 输出网络权重矩阵
         menu_debug.add_command(
             label="Print weight matrix",
             command=lambda: print(
@@ -829,11 +830,13 @@ class GUI:
         print(self.id_current_viewer_pattern)
 
     # Network functions
+    # 初始化Hopfield网络
     def initialize_new_network(self, N):
         self.hopfield_network = HopfieldNetwork(N=N)
         self.initialize_hopfield_network_variables()
         self.update_all_frames()
 
+    # 从本地加载Hopfield网络
     def load_hopfield_network(self, path=None):
         print("load hopfield network from file")
         if not path:
@@ -860,6 +863,7 @@ class GUI:
         else:
             self.hopfield_network.save_network(path)
 
+    # 训练指定图像，将图像输入到Hopfield网络中
     def add_images_to_network(self, input_path_vec=None):
         print("add image to hopfield network")
         if not input_path_vec:
@@ -878,6 +882,7 @@ class GUI:
             self.hopfield_network.train_pattern(xi)
             self.update_all_frames()
 
+    # 根据图像构造Hopfield网络
     def build_network_from_images(self, input_path_vec=None, N=10000):
         print("build hopfield network from images")
         if not input_path_vec:
@@ -898,6 +903,7 @@ class GUI:
             self.initialize_hopfield_network_variables()
             self.update_all_frames()
 
+    # 根据随机序列构造Hopfield网络
     def build_network_from_random_patterns(self, N, p):
         self.hopfield_network = HopfieldNetwork(N=N)
         self.hopfield_network.train_pattern(2 * np.random.randint(2, size=(N, p)) - 1)
